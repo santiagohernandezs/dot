@@ -11,20 +11,30 @@ if(!(Test-Path "C:\Users\$currentUser\scoop")){
 
 Write-Host "Installing scoop packages"
 
+$packages = @(
+    'main/wget',
+    'main/oh-my-posh',
+    'extras/terminal-icons',
+    'main/7zip',
+    'main/fzf',
+    'main/grep',
+    'main/1password-cli',
+    'main/winget'
+)
+
 # Install scoop packages
-scoop bucket add main
-scoop install main/wget
-scoop install main/oh-my-posh
-scoop install extras/terminal-icons
-scoop install main/7zip
-scoop install main/fzf
-scoop install main/grep
-scoop install main/1password-cli
+foreach($package in $packages){
+    if(!(scoop which $package)){
+        scoop install $package
+    } else {
+        Write-Host "$package already installed"
+    }
+}
 
 # Install Git
 if (!(Test-Path "C:\Program Files\Git\cmd\git.exe")) {
     Write-Host "Installing Git"
-    wget install --id Git.Git -e --source winget
+    winget install --id Git.Git -e --source winget
 } else {
     Write-Host "Git already installed"
 }
