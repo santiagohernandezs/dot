@@ -28,6 +28,7 @@ $packages = @(
     'extras/terminal-icons',
     'main/7zip',
     'main/fzf',
+    'main/git',
     'main/grep',
     'main/1password-cli',
     'main/winget'
@@ -42,13 +43,13 @@ foreach($package in $packages){
     }
 }
 
-# Install Git
-if (!(Test-Path "C:\Program Files\Git\cmd\git.exe")) {
-    Write-Host "Installing Git"
+# # Install Git
+# if (!(Test-Path "C:\Program Files\Git\cmd\git.exe")) {
+#     Write-Host "Installing Git"
 
-    downloadFile -url "https://github.com/git-for-windows/git/releases/download/v2.43.0.windows.1/Git-2.43.0-64-bit.exe" -output "C:\Users\$currentUser\Downloads\Git-2.43.0-64-bit.exe"
+#     downloadFile -url "https://github.com/git-for-windows/git/releases/download/v2.43.0.windows.1/Git-2.43.0-64-bit.exe" -output "C:\Users\$currentUser\Downloads\Git-2.43.0-64-bit.exe"
 
-} else {
-    Write-Host "Git already installed"
-}
+# } else {
+#     Write-Host "Git already installed"
+# }
 
