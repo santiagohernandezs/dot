@@ -70,7 +70,7 @@ $packages = @(
 # Install scoop packages
 foreach($package in $packages){
     if(!(scoop which $package.name)){
-        scoop add $package.bucket
+        scoop bucket add $package.bucket
         scoop install $package.slug
     } else {
         Write-Host "$($package.name) already installed"
