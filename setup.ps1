@@ -2,6 +2,16 @@ Set-StrictMode -Version Latest
 
 $currentUser = $env:USERNAME
 
+function downloadFile {
+    param(
+        [string]$url,
+        [string]$output
+    )
+
+    $webClient = New-Object System.Net.WebClient
+    $webClient.DownloadFile($url, $output)
+}
+
 Write-Host "Installing config files"
 
 # Install scoop
@@ -77,3 +87,7 @@ foreach($package in $packages){
     }
 }
 
+# Install winget packages
+https://releases.hyper.is/download/win
+
+downloadFile -url https://releases.hyper.is/download/win -output "C:\Users\$currentUser\Downloads\"
