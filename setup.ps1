@@ -14,6 +14,20 @@ if(!(Test-Path "C:\Users\$currentUser\scoop")){
 
 Write-Host "Installing scoop packages"
 
+#region scoop buckets
+$bucketList = @(
+    'extras'
+    'main'
+)
+
+foreach($bucket in $bucketList){
+    if(!(scoop bucket list | Select-String $bucket)){
+        scoop bucket add $bucket
+    } else {
+        Write-Host "$bucket already added"
+    }
+}
+
 $packages = @{
     winget='main/wget'
     'oh-my-posh'='main/oh-my-posh'
