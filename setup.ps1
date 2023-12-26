@@ -74,6 +74,16 @@ $packages = @(
         name='pwsh'
         bucket='main'
         slug='main/pwsh'
+    },
+    @{
+        name='hyper'
+        bucket='extras'
+        slug='extras/hyper'
+    },
+    @{
+        name='nvm'
+        bucket='main'
+        slug='main/nvm'
     }
 )
 
@@ -87,8 +97,3 @@ foreach($package in $packages){
     }
 }
 
-# Install winget packages
-# https://releases.hyper.is/download/win
-
-Invoke-RestMethod -Uri 'https://releases.hyper.is/download/win' -Method Get -OutFile "C:\Users\$currentUser\Downloads\hyper.exe"
-Invoke-Expression "C:\Users\$currentUser\Downloads\hyper.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
