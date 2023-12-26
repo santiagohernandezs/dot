@@ -2,17 +2,6 @@ Set-StrictMode -Version Latest
 
 $currentUser = $env:USERNAME
 
-function downloadFile {
-    param (
-        [string]$url,
-        [string]$output
-    )
-
-    $wc = New-Object System.Net.WebClient
-    $wc.DownloadFile($url, $output)
-}
-
-
 # Install scoop
 if(!(Test-Path "C:\Users\$currentUser\scoop")){
     Invoke-RestMethod -Uri 'https://get.scoop.sh' | Invoke-Expression
@@ -22,34 +11,22 @@ if(!(Test-Path "C:\Users\$currentUser\scoop")){
 
 Write-Host "Installing scoop packages"
 
-$packages = @(
-    'main/wget',
-    'main/oh-my-posh',
-    'extras/terminal-icons',
-    'main/7zip',
-    'main/fzf',
-    'main/git',
-    'main/grep',
-    'main/1password-cli',
-    'main/winget'
-)
-
-# Install scoop packages
-foreach($package in $packages){
-    if(!(scoop which $package)){
-        scoop install $package
-    } else {
-        Write-Host "$package already installed"
-    }
+$packages = @{
+    winget='main/wget'
+    'oh-my-posh'='main/oh-my-posh'
+    'teminal-icons'='extras/terminal-icons'
+    '7zip'='main/7zip'
+    fzf= 'main/fzf'
+    git='main/git'
+    grep='main/grep'
+    '1password-cli'='main/1password-cli'
 }
 
-# # Install Git
-# if (!(Test-Path "C:\Program Files\Git\cmd\git.exe")) {
-#     Write-Host "Installing Git"
-
-#     downloadFile -url "https://github.com/git-for-windows/git/releases/download/v2.43.0.windows.1/Git-2.43.0-64-bit.exe" -output "C:\Users\$currentUser\Downloads\Git-2.43.0-64-bit.exe"
-
-# } else {
-#     Write-Host "Git already installed"
-# }
-
+# Install scoop packages
+foreach($package in $packages.GetEnumerator()){
+    if(!(scoop which $package.Key)){
+        scoop install $package.Value
+    } else {
+        Write-Host "$($package.Key) already installed"
+    }
+}
