@@ -2,6 +2,17 @@ Set-StrictMode -Version Latest
 
 $currentUser = $env:USERNAME
 
+function downloadFile {
+    param (
+        [string]$url,
+        [string]$output
+    )
+
+    $wc = New-Object System.Net.WebClient
+    $wc.DownloadFile($url, $output)
+}
+
+
 # Install scoop
 if(!(Test-Path "C:\Users\$currentUser\scoop")){
     Invoke-RestMethod -Uri 'https://get.scoop.sh' | Invoke-Expression
@@ -35,7 +46,7 @@ foreach($package in $packages){
 if (!(Test-Path "C:\Program Files\Git\cmd\git.exe")) {
     Write-Host "Installing Git"
 
-    Invoke-RestMethod -Uri 'https://github.com/git-for-windows/git/releases/download/v2.43.0.windows.1/Git-2.43.0-64-bit.exe' | Invoke-Expression
+    downloadFile -url "https://github.com/git-for-windows/git/releases/download/v2.43.0.windows.1/Git-2.43.0-64-bit.exe" -output "C:\Users\$currentUser\Downloads\Git-2.43.0-64-bit.exe"
 
 } else {
     Write-Host "Git already installed"
