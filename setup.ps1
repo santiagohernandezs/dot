@@ -2,8 +2,11 @@ Set-StrictMode -Version Latest
 
 $currentUser = $env:USERNAME
 
+Write-Host "Installing config files"
+
 # Install scoop
 if(!(Test-Path "C:\Users\$currentUser\scoop")){
+    Write-Host "Installing scoop"
     Invoke-RestMethod -Uri 'https://get.scoop.sh' | Invoke-Expression
 } else {
     Write-Host "Scoop already installed"
