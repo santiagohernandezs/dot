@@ -14,10 +14,17 @@ Write-Host "Installing scoop packages"
 # Install scoop packages
 scoop bucket add main
 scoop install main/wget
-scoop install main/git
 scoop install main/oh-my-posh
 scoop install extras/terminal-icons
 scoop install main/7zip
 scoop install main/fzf
 scoop install main/grep
 scoop install main/1password-cli
+
+# Install Git
+if (!(Test-Path "C:\Program Files\Git\cmd\git.exe")) {
+    Write-Host "Installing Git"
+    winget install --id Git.Git -e --source winget
+} else {
+    Write-Host "Git already installed"
+}
