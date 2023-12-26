@@ -24,7 +24,7 @@ scoop install main/1password-cli
 # Install Git
 if (!(Test-Path "C:\Program Files\Git\cmd\git.exe")) {
     Write-Host "Installing Git"
-    winget install --id Git.Git -e --source winget
+    wget install --id Git.Git -e --source winget
 } else {
     Write-Host "Git already installed"
 }
