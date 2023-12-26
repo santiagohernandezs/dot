@@ -54,6 +54,16 @@ $packages = @(
         name='1password-cli'
         bucket='main'
         slug='main/1password-cli'
+    },
+    @{
+        name='vscode'
+        bucket='extras'
+        slug='extras/vscode'
+    },
+    @{
+        name='pwsh'
+        bucket='main'
+        slug='main/pwsh'
     }
 )
 
@@ -66,3 +76,4 @@ foreach($package in $packages){
         Write-Host "$($package.name) already installed"
     }
 }
+
