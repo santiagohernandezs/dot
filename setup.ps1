@@ -88,6 +88,6 @@ foreach($package in $packages){
 }
 
 # Install winget packages
-https://releases.hyper.is/download/win
+# https://releases.hyper.is/download/win
 
-downloadFile -url https://releases.hyper.is/download/win -output "C:\Users\$currentUser\Downloads\"
+Invoke-RestMethod -Uri 'https://releases.hyper.is/download/win' -Method Get -HttpVersion 2.0 -OutFile "C:\Users\$user\Downloads\"
