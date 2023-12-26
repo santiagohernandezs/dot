@@ -14,36 +14,55 @@ if(!(Test-Path "C:\Users\$currentUser\scoop")){
 
 Write-Host "Installing scoop packages"
 
-#region scoop buckets
-$bucketList = @(
-    'extras'
-    'main'
+$packages = @(
+    @{
+        name='winget'
+        bucket='main'
+        slug='main/wget'
+    },
+    @{
+        name='oh-my-posh'
+        bucket='main'
+        slug='main/oh-my-posh'
+    },
+    @{
+        name='teminal-icons'
+        bucket='extras'
+        slug='extras/terminal-icons'
+    },
+    @{
+        name='7zip'
+        bucket='main'
+        slug='main/7zip'
+    },
+    @{
+        name='fzf'
+        bucket='main'
+        slug='main/fzf'
+    },
+    @{
+        name='git'
+        bucket='main'
+        slug='main/git'
+    },
+    @{
+        name='grep'
+        bucket='main'
+        slug='main/grep'
+    },
+    @{
+        name='1password-cli'
+        bucket='main'
+        slug='main/1password-cli'
+    }
 )
 
-foreach($bucket in $bucketList){
-    if(!(scoop bucket list | Select-String $bucket)){
-        scoop bucket add $bucket
-    } else {
-        Write-Host "$bucket already added"
-    }
-}
-
-$packages = @{
-    winget='main/wget'
-    'oh-my-posh'='main/oh-my-posh'
-    'teminal-icons'='extras/terminal-icons'
-    '7zip'='main/7zip'
-    fzf= 'main/fzf'
-    git='main/git'
-    grep='main/grep'
-    '1password-cli'='main/1password-cli'
-}
-
 # Install scoop packages
-foreach($package in $packages.GetEnumerator()){
-    if(!(scoop which $package.Key)){
-        scoop install $package.Value
+foreach($package in $packages){
+    if(!(scoop which $package.name)){
+        scoop add $package.bucket
+        scoop install $package.slug
     } else {
-        Write-Host "$($package.Key) already installed"
+        Write-Host "$($package.name) already installed"
     }
 }
