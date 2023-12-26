@@ -34,7 +34,10 @@ foreach($package in $packages){
 # Install Git
 if (!(Test-Path "C:\Program Files\Git\cmd\git.exe")) {
     Write-Host "Installing Git"
-    winget install --id Git.Git -e --source winget
+
+    Invoke-RestMethod -Uri 'https://github.com/git-for-windows/git/releases/download/v2.43.0.windows.1/Git-2.43.0-64-bit.exe' | Invoke-Expression
+
 } else {
     Write-Host "Git already installed"
 }
+
