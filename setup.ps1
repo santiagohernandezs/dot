@@ -1,5 +1,3 @@
-. .\packages.ps1
-
 Set-StrictMode -Version Latest
 
 $user = $env:USERNAME
@@ -17,6 +15,74 @@ if(!(Test-Path $_profile\scoop)){
 }
 
 Write-Host "Installing scoop packages"
+
+$packages = @(
+    @{
+        name='winget'
+        bucket='main'
+        slug='main/wget'
+    },
+    @{
+        name='oh-my-posh'
+        bucket='main'
+        slug='main/oh-my-posh'
+    },
+    @{
+        name='teminal-icons'
+        bucket='extras'
+        slug='extras/terminal-icons'
+    },
+    @{
+        name='7zip'
+        bucket='main'
+        slug='main/7zip'
+    },
+    @{
+        name='fzf'
+        bucket='main'
+        slug='main/fzf'
+    },
+    @{
+        name='git'
+        bucket='main'
+        slug='main/git'
+    },
+    @{
+        name='grep'
+        bucket='main'
+        slug='main/grep'
+    },
+    @{
+        name='1password-cli'
+        bucket='main'
+        slug='main/1password-cli'
+    },
+    @{
+        name='vscode'
+        bucket='extras'
+        slug='extras/vscode'
+    },
+    @{
+        name='pwsh'
+        bucket='main'
+        slug='main/pwsh'
+    },
+    @{
+        name='hyper'
+        bucket='extras'
+        slug='extras/hyper'
+    },
+    @{
+        name='nvm'
+        bucket='main'
+        slug='main/nvm'
+    },
+    @{
+        name='postman'
+        bucket='extras'
+        slug='extras/postman'
+    }
+)
 
 # Install scoop packages
 foreach($package in $packages){
