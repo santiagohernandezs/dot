@@ -84,6 +84,11 @@ $packages = @(
         name='nvm'
         bucket='main'
         slug='main/nvm'
+    },
+    @{
+        name='postman'
+        bucket='extras'
+        slug='extras/postman'
     }
 )
 
@@ -97,3 +102,14 @@ foreach($package in $packages){
     }
 }
 
+New-Item -ItemType Directory -Path "C:\Users\$currentUser\.config" -Force -Name dotfiles
+New-Item -ItemType Directory -Path "C:\Users\$currentUser\.config" -Force -Name dotfiles\shell
+New-Item -ItemType File -Path "C:\Users\$currentUser\.config\dotfiles\shell" -Force -Name aliases.ps1
+New-Item -ItemType File -Path "C:\Users\$currentUser\.config\dotfiles\shell" -Force -Name profile.ps1
+New-Item -ItemType File -Path "C:\Users\$currentUser\.config\dotfiles\shell" -Force -Name hyper.js
+
+Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/santiagomartinmolina/dotfiles/master/shell/aliases.ps1' -OutFile "C:\Users\$currentUser\.config\dotfiles\shell\aliases.ps1"
+Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/santiagomartinmolina/dotfiles/master/shell/profile.ps1' -OutFile "C:\Users\$currentUser\.config\dotfiles\shell\profile.ps1"
+Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/santiagomartinmolina/dotfiles/master/shell/hyper.js' -OutFile "C:\Users\$currentUser\.config\dotfiles\shell\hyper.js"
+
+New-Item -ItemType SymbolicLink -Path "C:\Users\$currentUser\AppData\Roaming\Hyper" -Target "C:\Users\$currentUser\.config\dotfiles\shell\hyper.js" -Force
