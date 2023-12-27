@@ -112,6 +112,6 @@ Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/santiagohernandezs/dot
 Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/santiagohernandezs/dot/main/shell/profile.ps1' -OutFile "C:\Users\$currentUser\.config\dotfiles\shell\profile.ps1"
 
 Remove-Item -Path "C:\Users\$currentUser\AppData\Roaming\Hyper\.hyper.js" -Force
-Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/santiagohernandezs/dot/main/shell/.hyper.js' -OutFile "C:\Users\$currentUser\.config\dotfiles\shell\hyper.js"
+Invoke-RestMethod -Uri 'https://raw.githubusercontent.com/santiagohernandezs/dot/main/shell/.hyper.js' -OutFile "C:\Users\$currentUser\.config\dotfiles\shell\hyper.js" -Force
 
 New-Item -ItemType SymbolicLink -Path "C:\Users\$currentUser\AppData\Roaming\Hyper" -Target "C:\Users\$currentUser\.config\dotfiles\shell\hyper.js" -Force
